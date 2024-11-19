@@ -54,7 +54,7 @@ import { TechDocsAddons } from '@backstage/plugin-techdocs-react';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 
-import { ScoreCardsView } from '@janus-idp/backstage-plugin-rules';
+import { CardsView } from '@janus-idp/backstage-plugin-rules';
 
 const techdocsContent = (
   <EntityTechdocsContent>
@@ -197,7 +197,7 @@ const websiteEntityPage = (
       {techdocsContent}
     </EntityLayout.Route>
     <EntityLayout.Route path="/rules" title="Scorecard">
-      <ScoreCardsView />
+      <CardsView />
     </EntityLayout.Route>
   </EntityLayout>
 );

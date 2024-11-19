@@ -9,11 +9,13 @@ import {
 import { CodeEditor } from '@patternfly/react-code-editor';
 import { Modal, ModalVariant } from '@patternfly/react-core';
 
-import { ScoreCardResult } from '../../api';
+import { CardResult } from '../../../api';
+import { ScoreMeasureValue } from '../../../api/types';
 import { ScoreCardHistory } from './ScoreCardHistory';
 
 type Props = {
-  scorecard: ScoreCardResult;
+  scorecard: CardResult;
+  measureValue: ScoreMeasureValue;
 };
 
 const darkStyles = {
@@ -21,7 +23,7 @@ const darkStyles = {
   '--pf-v5-chart-donut--label--title--Fill': 'white',
 } as React.CSSProperties;
 
-export const ScorecardCard = ({ scorecard }: Props) => {
+export const ScorecardCard = ({ scorecard, measureValue }: Props) => {
   const [isSourceModalOpen, setIsSourceModalOpen] = React.useState(false);
   const [isHistoryModalOpen, setHistoryModalOpen] = React.useState(false);
 
@@ -37,7 +39,7 @@ export const ScorecardCard = ({ scorecard }: Props) => {
     setHistoryModalOpen(!isHistoryModalOpen);
   };
 
-  function formThresholdData(scoreCard: ScoreCardResult): any[] {
+  function formThresholdData(scoreCard: CardResult): any[] {
     return scoreCard.thresholds.map(threshold => {
       return {
         x: threshold.name,
@@ -46,7 +48,7 @@ export const ScorecardCard = ({ scorecard }: Props) => {
     });
   }
 
-  function formThresholdDataLabels(scoreCard: ScoreCardResult): any[] {
+  function formThresholdDataLabels(scoreCard: CardResult): any[] {
     const map = scoreCard.thresholds.map(threshold => {
       return {
         name: `${threshold.name} threshold from ${threshold.limit}`,
@@ -55,7 +57,7 @@ export const ScorecardCard = ({ scorecard }: Props) => {
     return map;
   }
 
-  function formThresholdValues(scoreCard: ScoreCardResult): any[] {
+  function formThresholdValues(scoreCard: CardResult): any[] {
     return scoreCard.thresholds.map(threshold => {
       return {
         value: threshold.limit - 1,
@@ -114,7 +116,10 @@ export const ScorecardCard = ({ scorecard }: Props) => {
             width={425}
           >
             <ChartDonutUtilization
-              data={{ x: 'Storage capacity', y: scorecard.measureValue }}
+              data={{
+                x: 'Storage capacity',
+                y: measureValue.score,
+              }}
               labels={({ datum }) =>
                 datum.x ? `${datum.x}: ${datum.y}%` : null
               }
@@ -122,7 +127,7 @@ export const ScorecardCard = ({ scorecard }: Props) => {
               legendOrientation="vertical"
               invert
               subTitle={`of ${scorecard.maxValue}`}
-              title={`${scorecard.measureValue}`}
+              title={`${measureValue.score}`}
               themeColor={ChartThemeColor.green}
               thresholds={formThresholdValues(scorecard)}
             />

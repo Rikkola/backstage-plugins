@@ -9,10 +9,10 @@ import { useRouteRef } from '@backstage/core-plugin-api';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
-import { ScoreCardResult } from '../../api';
+import { CardResult } from '../../api';
 import { rootRouteRef } from '../../routes';
 import { useScoreCards } from '../../useRulesClient';
-import { ScorecardCard } from './ScorecardCard';
+import { CardView } from './Reporting/CardView';
 
 const containerStyle = { width: '100%', height: '100vh' };
 
@@ -43,10 +43,10 @@ export const EmptyCardState = () => {
   );
 };
 type Props = {
-  scorecards: ScoreCardResult[];
+  scorecards: CardResult[];
 };
 
-export const ScoreCardVisualization = ({ scorecards }: Props) => {
+export const CardVisualization = ({ scorecards }: Props) => {
   return (
     <React.Fragment>
       <Grid container spacing={2}>
@@ -57,7 +57,7 @@ export const ScoreCardVisualization = ({ scorecards }: Props) => {
         </Grid>
         {scorecards.map(scorecard => (
           <Grid item xs={4} key={scorecard.measureName}>
-            <ScorecardCard scorecard={scorecard} />
+            <CardView scorecard={scorecard} />
           </Grid>
         ))}
       </Grid>
@@ -65,7 +65,7 @@ export const ScoreCardVisualization = ({ scorecards }: Props) => {
   );
 };
 
-export const ScoreCardsView = () => {
+export const CardsView = () => {
   const { value, loading, error } = useScoreCards();
 
   if (loading) {
@@ -76,5 +76,5 @@ export const ScoreCardsView = () => {
     return <EmptyCardState />;
   }
 
-  return <ScoreCardVisualization scorecards={value || []} />;
+  return <CardVisualization scorecards={value || []} />;
 };

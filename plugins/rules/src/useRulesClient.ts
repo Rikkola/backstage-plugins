@@ -3,11 +3,11 @@ import { useEffect, useState } from 'react';
 import { useApi } from '@backstage/core-plugin-api';
 
 import { scoreCardApiRef } from './api/api';
-import { ScoreCardResult } from './api/types';
+import { CardResult } from './api/types';
 
 export const useScoreCards = () => {
   const [loading, setLoading] = useState<boolean>(true);
-  const [value, setValue] = useState<ScoreCardResult[]>([]);
+  const [value, setValue] = useState<CardResult[]>([]);
   const [error, setError] = useState<boolean>(false);
   const scoreCardApi = useApi(scoreCardApiRef);
   const getObjects = async () => {

@@ -9,10 +9,10 @@ import {
   Card,
   CardConfig,
   CardData,
+  CardResult,
   Job,
   RawData,
   RawDataDetail,
-  ScoreCardResult,
 } from './types';
 
 export class ScoreCardBackendClient implements ScoreCardApi {
@@ -77,7 +77,7 @@ export class ScoreCardBackendClient implements ScoreCardApi {
     return await this.handleResponse(response);
   }
 
-  async listCardResults(): Promise<{ results: ScoreCardResult[] }> {
+  async listCardResults(): Promise<{ results: CardResult[] }> {
     const url = `${await this.getIngestorBaseUrl()}/card/results`;
     const response = await fetch(url, {
       method: 'GET',
@@ -88,7 +88,7 @@ export class ScoreCardBackendClient implements ScoreCardApi {
 
   async listCardResultHistory(
     cardId: number,
-  ): Promise<{ results: ScoreCardResult[] }> {
+  ): Promise<{ results: CardResult[] }> {
     const url = `${await this.getIngestorBaseUrl()}/card/${cardId}/history`;
     const response = await fetch(url, {
       method: 'GET',

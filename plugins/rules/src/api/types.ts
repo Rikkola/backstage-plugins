@@ -1,8 +1,12 @@
-export type ScoreCardResult = {
+export type ScoreMeasureValue = {
+  score: number;
+};
+
+export type CardResult = {
   cardId: number;
   runTime: number;
   status: string;
-  measureValue: number;
+  measureValue: any;
   measureName: string;
   maxValue: number;
   yaml: string;

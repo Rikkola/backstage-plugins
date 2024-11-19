@@ -4,10 +4,10 @@ import {
   Card,
   CardConfig,
   CardData,
+  CardResult,
   Job,
   RawData,
   RawDataDetail,
-  ScoreCardResult,
 } from './types';
 
 export interface ScoreCardApi {
@@ -17,11 +17,9 @@ export interface ScoreCardApi {
 
   getCardData(cardId: number): Promise<CardData>;
 
-  listCardResults(): Promise<{ results: ScoreCardResult[] }>;
+  listCardResults(): Promise<{ results: CardResult[] }>;
 
-  listCardResultHistory(
-    cardId: number,
-  ): Promise<{ results: ScoreCardResult[] }>;
+  listCardResultHistory(cardId: number): Promise<{ results: CardResult[] }>;
 
   listScoreCards(): Promise<{ results: Card[] }>;
 

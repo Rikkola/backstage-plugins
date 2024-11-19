@@ -11,22 +11,16 @@ import {
   ChartThreshold,
   ChartVoronoiContainer,
 } from '@patternfly/react-charts';
+import { Title } from '@patternfly/react-core';
 import { chart_color_orange_300 } from '@patternfly/react-tokens';
 
-import { scoreCardApiRef } from '../../api';
+import { scoreCardApiRef } from '../../../api';
+import { ScoreMeasureValue } from '../../../api/types';
+import { ChartData, darkStyles } from './types';
 
 type Props = {
   cardId: number;
 };
-const darkStyles = {
-  '--pf-v5-chart-global--label--Fill': 'white',
-} as React.CSSProperties;
-
-interface ChartData {
-  name: string;
-  y: number;
-  x: number;
-}
 
 export const ScoreCardHistory = ({ cardId }: Props) => {
   const [scoreCardResults, setScoreCardResults] = useState<ChartData[]>([]);
@@ -55,7 +49,7 @@ export const ScoreCardHistory = ({ cardId }: Props) => {
         scResults.push({
           name: 'Score',
           x: result.runTime,
-          y: result.measureValue,
+          y: (result.measureValue as ScoreMeasureValue).score,
         });
       });
 

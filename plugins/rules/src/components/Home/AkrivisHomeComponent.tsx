@@ -18,12 +18,12 @@ import { JobsTable } from '../Jobs';
 export const AkrivisHomeComponent = () => {
   return (
     <Page themeId="tool">
-      <Header title="Welcome to Scorecard" subtitle="Optional subtitle">
+      <Header title="Welcome to Scorecard">
         <HeaderLabel label="Owner" value="Team X" />
         <HeaderLabel label="Lifecycle" value="Alpha" />
       </Header>
       <Content>
-        <ContentHeader title="Plugin title">
+        <ContentHeader title="Akrivis - Readiness Score">
           <SupportButton>A plugin for scorecards</SupportButton>
         </ContentHeader>
         <Grid container spacing={3} direction="column">
